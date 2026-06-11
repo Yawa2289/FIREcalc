@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="de">
-<head>
+<html lang="de"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#378ADD">
@@ -8,9 +8,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="FIRE">
 <title>FIRE Rechner</title>
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link rel="manifest" href="file:///C:/Users/Yannick/Downloads/manifest.json">
+<link rel="apple-touch-icon" href="file:///C:/Users/Yannick/Downloads/icon-192.png">
+<script src="index_files/chart.umd.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -269,24 +269,33 @@
 
 <header>
   <h1>FIRE Rechner</h1>
-  <span class="save-indicator" id="saveIndicator">Einstellungen gespeichert</span>
+  <span class="save-indicator" id="saveIndicator">FIRE Rechner</span>
 </header>
 
 <div class="container">
 
   <!-- Auswanderungsjahr -->
   <div class="card">
-    <div class="section-label">Auswanderungsjahr</div>
-    <div class="param-item accent-blue">
-      <div class="param-label">Jahr der Auswanderung / Renteneintritt</div>
-      <div class="param-row">
-        <input type="range" id="retireYear" min="2026" max="2040" step="1" value="2029">
-        <span class="param-val" id="retireYearOut">2029</span>
+    <div class="section-label">Persönliche Angaben &amp; Auswanderungsjahr</div>
+    <div class="param-grid" style="margin-bottom:10px;">
+      <div class="param-item accent-blue">
+        <div class="param-label">Geburtsjahr</div>
+        <div class="param-row">
+          <input type="range" id="birthYear" min="1950" max="2005" step="1" value="1989">
+          <span class="param-val" id="birthYearOut">1989</span>
+        </div>
+      </div>
+      <div class="param-item accent-blue">
+        <div class="param-label">Jahr der Auswanderung / Frührenteneintritt</div>
+        <div class="param-row">
+          <input type="range" id="retireYear" min="2026" max="2055" step="1" value="2029">
+          <span class="param-val" id="retireYearOut">2029</span>
+        </div>
       </div>
     </div>
     <div class="banner blue" style="margin-top:10px;">
       <span>Jahr: <strong id="bannerYear">2029</strong></span>
-      <span>Alter: <strong id="bannerAge">40</strong></span>
+      <span>Alter bei Auswanderung: <strong id="bannerAge">40</strong></span>
       <span>bis Rente: <strong id="bannerYearsToRente">28 J.</strong></span>
       <span>Zeitraum: <strong id="bannerRange">2029–2074</strong></span>
     </div>
@@ -305,15 +314,15 @@
         <div class="param-item accent-blue">
           <div class="param-label">Aktienteil</div>
           <div class="param-row">
-            <input type="range" id="stockValM" min="0" max="1200000" step="5000" value="450000">
-            <span class="param-val" id="stockValMOut">450.000 €</span>
+            <input type="range" id="stockValM" min="0" max="1200000" step="5000" value="0">
+            <span class="param-val" id="stockValMOut">0 €</span>
           </div>
         </div>
         <div class="param-item accent-green">
           <div class="param-label">Cashteil</div>
           <div class="param-row">
-            <input type="range" id="cashValM" min="0" max="1200000" step="5000" value="250000">
-            <span class="param-val" id="cashValMOut">250.000 €</span>
+            <input type="range" id="cashValM" min="0" max="1200000" step="5000" value="0">
+            <span class="param-val" id="cashValMOut">0 €</span>
           </div>
         </div>
       </div>
@@ -323,46 +332,46 @@
       <div style="background:var(--bg2);border-radius:var(--radius);padding:12px 14px;margin-bottom:10px;">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
           <span style="font-size:13px;color:var(--text2);">Gesamtvermögen:</span>
-          <input type="number" id="totalFixed" value="700000" min="100000" max="2000000" step="5000">
+          <input type="number" id="totalFixed" value="0" min="100000" max="2000000" step="5000">
           <span style="font-size:13px;color:var(--text2);">€</span>
         </div>
         <div class="param-label">Aktienanteil (Rest = Cash)</div>
         <div class="param-row">
-          <input type="range" id="stockPctSlider" min="0" max="100" step="1" value="64">
-          <span class="param-val" id="stockPctOut">64 %</span>
+          <input type="range" id="stockPctSlider" min="0" max="100" step="1" value="0">
+          <span class="param-val" id="stockPctOut">0 %</span>
         </div>
         <div class="alloc-bar">
-          <div class="alloc-bar-stock" id="allocBarStock" style="width:64%;"></div>
-          <div class="alloc-bar-cash" id="allocBarCash" style="width:36%;"></div>
+          <div class="alloc-bar-stock" id="allocBarStock" style="width:0%;"></div>
+          <div class="alloc-bar-cash" id="allocBarCash" style="width:100%;"></div>
         </div>
         <div class="split-labels">
-          <span style="color:var(--blue-text);" id="splitStockLabel">Aktien: 448.000 €</span>
-          <span style="color:var(--green-text);" id="splitCashLabel">Cash: 252.000 €</span>
+          <span style="color:var(--blue-text);" id="splitStockLabel">Aktien: 0 €</span>
+          <span style="color:var(--green-text);" id="splitCashLabel">Cash: 0 €</span>
         </div>
       </div>
     </div>
 
     <div class="total-bar">
       <span style="color:var(--text2);">Gesamt:</span>
-      <span style="font-weight:600;" id="totalVal">700.000 €</span>
+      <span style="font-weight:600;" id="totalVal">0 €</span>
       <span style="flex:1;"></span>
-      <span class="tag" style="background:var(--blue-bg);color:var(--blue-text);" id="stockPctTag">64 % Aktien</span>
-      <span class="tag" style="background:var(--green-bg);color:var(--green-text);" id="cashPctTag">36 % Cash</span>
+      <span class="tag" style="background:var(--blue-bg);color:var(--blue-text);" id="stockPctTag">0 % Aktien</span>
+      <span class="tag" style="background:var(--green-bg);color:var(--green-text);" id="cashPctTag">100 % Cash</span>
     </div>
 
     <div class="param-grid">
       <div class="param-item accent-blue">
         <div class="param-label">Aktienrendite p.a. (nach Steuern)</div>
         <div class="param-row">
-          <input type="range" id="stockReturn" min="2" max="10" step="0.5" value="6">
-          <span class="param-val" id="stockReturnOut">6,0 %</span>
+          <input type="range" id="stockReturn" min="0" max="10" step="0.5" value="0">
+          <span class="param-val" id="stockReturnOut">0,0 %</span>
         </div>
       </div>
       <div class="param-item accent-green">
         <div class="param-label">Cashrendite p.a.</div>
         <div class="param-row">
-          <input type="range" id="cashReturn" min="0" max="5" step="0.25" value="2">
-          <span class="param-val" id="cashReturnOut">2,0 %</span>
+          <input type="range" id="cashReturn" min="0" max="5" step="0.25" value="0">
+          <span class="param-val" id="cashReturnOut">0,00 %</span>
         </div>
       </div>
     </div>
@@ -375,42 +384,42 @@
       <div class="param-item">
         <div class="param-label">Jährliche Ausgaben (erstes Jahr)</div>
         <div class="param-row">
-          <input type="range" id="expenses" min="18000" max="40000" step="500" value="24000">
-          <span class="param-val" id="expensesOut">24.000 €</span>
+          <input type="range" id="expenses" min="0" max="40000" step="500" value="0">
+          <span class="param-val" id="expensesOut">0 €</span>
         </div>
       </div>
       <div class="param-item">
         <div class="param-label">Inflation p.a.</div>
         <div class="param-row">
-          <input type="range" id="inflation" min="1" max="5" step="0.25" value="3">
-          <span class="param-val" id="inflationOut">3,0 %</span>
+          <input type="range" id="inflation" min="0" max="5" step="0.25" value="0">
+          <span class="param-val" id="inflationOut">0,00 %</span>
         </div>
       </div>
       <div class="param-item">
         <div class="param-label">Dividenden (erstes Jahr)</div>
         <div class="param-row">
-          <input type="range" id="divStart" min="3000" max="15000" step="250" value="7000">
-          <span class="param-val" id="divStartOut">7.000 €</span>
+          <input type="range" id="divStart" min="0" max="15000" step="250" value="0">
+          <span class="param-val" id="divStartOut">0 €</span>
         </div>
       </div>
       <div class="param-item">
         <div class="param-label">Dividendenwachstum p.a.</div>
         <div class="param-row">
-          <input type="range" id="divGrowth" min="0" max="8" step="0.5" value="3">
-          <span class="param-val" id="divGrowthOut">3,0 %</span>
+          <input type="range" id="divGrowth" min="0" max="8" step="0.5" value="0">
+          <span class="param-val" id="divGrowthOut">0,0 %</span>
         </div>
       </div>
       <div class="param-item">
         <div class="param-label">Trading-/sonstige Einnahmen p.a.</div>
         <div class="param-row">
-          <input type="range" id="trading" min="0" max="30000" step="500" value="10000">
-          <span class="param-val" id="tradingOut">10.000 €</span>
+          <input type="range" id="trading" min="0" max="30000" step="500" value="0">
+          <span class="param-val" id="tradingOut">0 €</span>
         </div>
       </div>
       <div class="info-stat">
         <div class="param-label">Gewichtete Gesamtrendite</div>
-        <div style="font-size:15px;font-weight:600;" id="weightedReturn">—</div>
-        <div style="font-size:11px;margin-top:2px;" id="realReturn">—</div>
+        <div style="font-size:15px;font-weight:600;" id="weightedReturn">NaN % gewichtet</div>
+        <div style="font-size: 11px; margin-top: 2px; color: rgb(216, 90, 48);" id="realReturn">Realrendite: NaN %</div>
       </div>
     </div>
   </div>
@@ -429,16 +438,16 @@
       <div class="param-item accent-purple">
         <div class="param-label">Jährliche Rente (gesetzl. + bAV)</div>
         <div class="param-row">
-          <input type="range" id="renteAmount" min="0" max="80000" step="500" value="31800">
-          <span class="param-val" id="renteAmountOut">31.800 €</span>
+          <input type="range" id="renteAmount" min="0" max="80000" step="500" value="0">
+          <span class="param-val" id="renteAmountOut">0 €</span>
         </div>
       </div>
     </div>
     <div class="banner purple" style="margin-top:10px;">
       <span>Rentenbeginn: <strong id="renteBannerYear">2057</strong></span>
       <span>Alter: <strong id="renteBannerAge">68</strong></span>
-      <span>Jährlich: <strong id="renteBannerAmount">31.800 €</strong></span>
-      <span>Monatlich: <strong id="renteBannerMonthly">2.650 €</strong></span>
+      <span>Jährlich: <strong id="renteBannerAmount">0 €</strong></span>
+      <span>Monatlich: <strong id="renteBannerMonthly">0 €</strong></span>
     </div>
   </div>
 
@@ -490,23 +499,23 @@
     <div class="metrics">
       <div class="metric">
         <div class="metric-label">Depot-Entnahme Jahr 1</div>
-        <div class="metric-val" id="mEntnahme">—</div>
-        <div class="metric-sub" id="mEntnahmeRate">—</div>
+        <div class="metric-val" id="mEntnahme">0 €</div>
+        <div class="metric-sub" id="mEntnahmeRate">NaN % Rate</div>
       </div>
       <div class="metric">
         <div class="metric-label">Vermögen +10 Jahre</div>
-        <div class="metric-val" id="m10">—</div>
-        <div class="metric-sub" id="m10label">—</div>
+        <div class="metric-val" id="m10">0 €</div>
+        <div class="metric-sub" id="m10label">2039 (Alter 50)</div>
       </div>
       <div class="metric">
         <div class="metric-label">Vermögen +20 Jahre</div>
-        <div class="metric-val" id="m20">—</div>
-        <div class="metric-sub" id="m20label">—</div>
+        <div class="metric-val" id="m20">0 €</div>
+        <div class="metric-sub" id="m20label">2049 (Alter 60)</div>
       </div>
       <div class="metric">
         <div class="metric-label">Depot läuft leer</div>
-        <div class="metric-val" id="mRunout">—</div>
-        <div class="metric-sub" id="mRunoutAge">—</div>
+        <div class="metric-val" id="mRunout" style="color: rgb(29, 158, 117);">&gt; 2074</div>
+        <div class="metric-sub" id="mRunoutAge">Kein Leerstand</div>
       </div>
     </div>
 
@@ -519,58 +528,25 @@
     </div>
 
     <div class="chart-wrap">
-      <canvas id="fireChart" role="img" aria-label="Vermögensentwicklung FIRE Simulation"></canvas>
+      <canvas id="fireChart" role="img" aria-label="Vermögensentwicklung FIRE Simulation" style="display: block; box-sizing: border-box; height: 340px; width: 694px;" width="694" height="340"></canvas>
     </div>
 
     <div class="info-box">
-      Entnahmelogik: Lücke (Ausgaben − Dividenden − Trading) zuerst aus Cashtopf, dann Aktientopf. Rente startet im gewählten Jahr. Lila Linie im Chart = Rentenbeginn.
+      Entnahmelogik: Lücke (Ausgaben − Dividenden − Trading) zuerst aus 
+Cashtopf, dann Aktientopf. Rente startet im gewählten Jahr. Lila Linie 
+im Chart = Rentenbeginn.
     </div>
   </div>
 
 </div>
 
 <script>
-const BIRTH = 1989;
 let mode = 'fixed';
 let chart = null;
-let saveTimer = null;
 
 const $ = id => document.getElementById(id);
 const fmtK = v => v <= 0 ? '0 €' : v >= 1000000 ? (v/1000000).toFixed(2)+' Mio. €' : Math.round(v/1000)+'k €';
 const fmt = v => Math.round(Math.max(0,v)).toLocaleString('de-DE')+' €';
-
-const STORAGE_KEY = 'fire_settings_v1';
-const FIELDS = ['retireYear','stockValM','cashValM','totalFixed','stockPctSlider','stockReturn','cashReturn',
-  'expenses','inflation','divStart','divGrowth','trading','renteYear','renteAmount',
-  'crashEnabled','crashYear','crashDepth','crashRecovery','crashBuy'];
-
-function saveSettings() {
-  const s = { mode };
-  FIELDS.forEach(id => {
-    const el = $(id);
-    if (!el) return;
-    s[id] = el.type === 'checkbox' ? el.checked : el.value;
-  });
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
-  $('saveIndicator').textContent = '✓ Gespeichert';
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => { $('saveIndicator').textContent = 'Einstellungen gespeichert'; }, 2000);
-}
-
-function loadSettings() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return;
-    const s = JSON.parse(raw);
-    if (s.mode) { mode = s.mode; setMode(mode, false); }
-    FIELDS.forEach(id => {
-      const el = $(id);
-      if (!el || s[id] === undefined) return;
-      if (el.type === 'checkbox') el.checked = s[id];
-      else el.value = s[id];
-    });
-  } catch(e) {}
-}
 
 function setMode(m, doUpdate = true) {
   mode = m;
@@ -619,6 +595,7 @@ function calcFIRE(retireYear, stockVal, cashVal, stockReturn, cashReturn, expens
 }
 
 function update() {
+  const birthYear = +$('birthYear').value;
   const retireYear = +$('retireYear').value;
   const { stock: stockVal, cash: cashVal } = getStockCash();
   const stockReturn = +$('stockReturn').value;
@@ -638,9 +615,10 @@ function update() {
   const total = stockVal + cashVal;
   const sp = total > 0 ? Math.round(stockVal/total*100) : 0;
 
+  $('birthYearOut').textContent = birthYear;
   $('retireYearOut').textContent = retireYear;
   $('bannerYear').textContent = retireYear;
-  $('bannerAge').textContent = retireYear-BIRTH;
+  $('bannerAge').textContent = retireYear-birthYear;
   $('bannerYearsToRente').textContent = Math.max(0,renteYear-retireYear)+' J.';
   $('bannerRange').textContent = retireYear+'–'+(retireYear+45);
 
@@ -669,7 +647,7 @@ function update() {
   $('renteYearOut').textContent = renteYear;
   $('renteAmountOut').textContent = renteAmount.toLocaleString('de-DE')+' €';
   $('renteBannerYear').textContent = renteYear;
-  $('renteBannerAge').textContent = renteYear-BIRTH;
+  $('renteBannerAge').textContent = renteYear-birthYear;
   $('renteBannerAmount').textContent = renteAmount.toLocaleString('de-DE')+' €';
   $('renteBannerMonthly').textContent = Math.round(renteAmount/12).toLocaleString('de-DE')+' €';
   $('crashYearOut').textContent = crashYear;
@@ -698,12 +676,12 @@ function update() {
   const y10=retireYear+10, y20=retireYear+20;
   const i10=base.years.indexOf(y10), i20=base.years.indexOf(y20);
   $('m10').textContent = i10>=0?fmtK(ad.totalArr[i10]):'—';
-  $('m10label').textContent = y10+' (Alter '+(y10-BIRTH)+')';
+  $('m10label').textContent = y10+' (Alter '+(y10-birthYear)+')';
   $('m20').textContent = i20>=0?fmtK(ad.totalArr[i20]):'—';
-  $('m20label').textContent = y20+' (Alter '+(y20-BIRTH)+')';
+  $('m20label').textContent = y20+' (Alter '+(y20-birthYear)+')';
 
   const ro = ad.runout;
-  if (ro) { $('mRunout').textContent=ro; $('mRunoutAge').textContent='Alter '+(ro-BIRTH); $('mRunout').style.color='#D85A30'; }
+  if (ro) { $('mRunout').textContent=ro; $('mRunoutAge').textContent='Alter '+(ro-birthYear); $('mRunout').style.color='#D85A30'; }
   else { $('mRunout').textContent='> '+(retireYear+45); $('mRunout').style.color='#1D9E75'; $('mRunoutAge').textContent='Kein Leerstand'; }
 
   const datasets = [
@@ -721,21 +699,26 @@ function update() {
     ctx.lineWidth=1; ctx.strokeStyle='rgba(136,135,128,0.35)'; ctx.setLineDash([4,3]); ctx.stroke(); ctx.restore();
   }};
 
-  const renteLine = { id:'rl', afterDraw(c) {
-    const idx = base.years.indexOf(renteYear);
-    if (idx < 0) return;
-    const meta = c.getDatasetMeta(0);
-    if (!meta.data[idx]) return;
-    const x = meta.data[idx].x, ctx = c.ctx;
-    ctx.save(); ctx.beginPath(); ctx.moveTo(x,c.chartArea.top); ctx.lineTo(x,c.chartArea.bottom);
-    ctx.lineWidth=1.5; ctx.strokeStyle='rgba(83,74,183,0.5)'; ctx.setLineDash([4,3]); ctx.stroke();
-    ctx.fillStyle='rgba(83,74,183,0.8)'; ctx.font='11px -apple-system,sans-serif';
-    ctx.fillText('Rente '+renteYear, x+4, c.chartArea.top+14);
-    ctx.restore();
-  }};
+  // Store renteYear globally so the plugin always reads the current value
+  window._currentRenteYear = renteYear;
+  window._currentBaseYears = base.years;
 
   if (chart) { chart.data = { labels:base.years, datasets }; chart.update(); }
   else {
+    const renteLine = { id:'rl', afterDraw(c) {
+      const ry = window._currentRenteYear;
+      const years = window._currentBaseYears || [];
+      const idx = years.indexOf(ry);
+      if (idx < 0) return;
+      const meta = c.getDatasetMeta(0);
+      if (!meta.data[idx]) return;
+      const x = meta.data[idx].x, ctx = c.ctx;
+      ctx.save(); ctx.beginPath(); ctx.moveTo(x,c.chartArea.top); ctx.lineTo(x,c.chartArea.bottom);
+      ctx.lineWidth=1.5; ctx.strokeStyle='rgba(83,74,183,0.5)'; ctx.setLineDash([4,3]); ctx.stroke();
+      ctx.fillStyle='rgba(83,74,183,0.8)'; ctx.font='11px -apple-system,sans-serif';
+      ctx.fillText('Rente '+ry, x+4, c.chartArea.top+14);
+      ctx.restore();
+    }};
     chart = new Chart($('fireChart'), {
       type:'line', data:{ labels:base.years, datasets }, plugins:[crosshair, renteLine],
       options:{
@@ -749,7 +732,7 @@ function update() {
             borderColor:'rgba(255,255,255,0.1)', borderWidth:1, padding:12,
             titleFont:{ size:13, weight:'600' }, bodyFont:{ size:12 },
             callbacks:{
-              title: items => 'Jahr '+items[0].label+'  (Alter '+(parseInt(items[0].label)-BIRTH)+')',
+              title: items => 'Jahr '+items[0].label+'  (Alter '+(parseInt(items[0].label)-birthYear)+')',
               label: ctx => {
                 const n=['Gesamtvermögen (Basis)','Aktienteil','Cashteil','Ausgaben p.a.','Gesamtvermögen (Crash)'];
                 return '  '+(n[ctx.datasetIndex]||'')+':  '+Math.round(ctx.parsed.y).toLocaleString('de-DE')+' €';
@@ -766,12 +749,12 @@ function update() {
     });
   }
 
-  saveSettings();
+  saveSettings_noop();
 }
 
 // Event listeners
 $('crashEnabled').addEventListener('change', update);
-['retireYear','stockReturn','cashReturn','expenses','inflation','trading','divStart','divGrowth',
+['birthYear','retireYear','stockReturn','cashReturn','expenses','inflation','trading','divStart','divGrowth',
  'renteYear','renteAmount','crashYear','crashDepth','crashRecovery','crashBuy',
  'stockValM','cashValM','stockPctSlider'].forEach(id => {
   const el = $(id);
@@ -784,9 +767,11 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 
-// Init
-loadSettings();
+function saveSettings_noop() {}
+
+// Init – always start fresh, no saved state
 update();
 </script>
-</body>
-</html>
+
+
+</body></html>
