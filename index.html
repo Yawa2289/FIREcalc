@@ -770,7 +770,27 @@ if ('serviceWorker' in navigator) {
 function saveSettings_noop() {}
 
 // Init – always start fresh, no saved state
-update();
+
+// Force reset all fields to 0 on every page load - overrides any browser-cached values
+(function() {
+  var zeros = ['stockValM','cashValM','stockPctSlider','stockReturn','cashReturn',
+    'expenses','inflation','divStart','divGrowth','trading','renteAmount'];
+  var defaults = { totalFixed: 0, birthYear: 1990, retireYear: 2035, renteYear: 2057,
+    crashYear: 2040, crashDepth: 30, crashRecovery: 3, crashBuy: 0 };
+  document.addEventListener('DOMContentLoaded', function() {
+    zeros.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.value = 0;
+    });
+    Object.keys(defaults).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.value = defaults[id];
+    });
+    var cb = document.getElementById('crashEnabled');
+    if (cb) cb.checked = false;
+      update();
+  });
+})();
 </script>
 
 
